@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ pom.xml from NWTSParent modified Monday, April 8, 2013 11:24:29 CDT (-0500).
+  ~
+  ~ Copyright 2010-2013 the original author or authors.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.nicholaswilliams.java</groupId>
+	<artifactId>nwts-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>NWTSParent</name>
+	<version>1.0</version>
+	<description>
+		Parent POM for all NWTS Java Code projects.
+	</description>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo,maven,manual</distribution>
+		</license>
+	</licenses>
+
+	<url>http://java.nicholaswilliams.net/</url>
+	<scm>
+		<url>http://svn.nicholaswilliams.net/browse/tags/release-1.0</url>
+		<connection>scm:svn:http://svn.nicholaswilliams.net/NWTSParent/tags/release-1.0</connection>
+		<developerConnection>scm:svn:svn://svn.nicholaswilliams.net/NWTSParent/tags/release-1.0</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>YouTrack</system>
+		<url>http://issues.java.nicholaswilliams.net/</url>
+	</issueManagement>
+	<ciManagement>
+		<system>TeamCity</system>
+		<url>http://build.java.nicholaswilliams.net/</url>
+	</ciManagement>
+	<inceptionYear>2010</inceptionYear>
+
+	<organization>
+		<name>NWTS Java Code</name>
+		<url>http://java.nicholaswilliams.net/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>nicholas.williams</id>
+			<name>Nick Williams</name>
+			<email>nicholas@nicholaswilliams.net</email>
+			<url>http://www.nicholaswilliams.net</url>
+			<timezone>America/Chicago</timezone>
+		</developer>
+	</developers>
+
+	<contributors>
+
+	</contributors>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<sonatypeOssRepositorySnapshotUrl>https://oss.sonatype.org/content/repositories/snapshots</sonatypeOssRepositorySnapshotUrl>
+		<sonatypeOssRepositoryStagingUrl>https://oss.sonatype.org/service/local/staging/deploy/maven2</sonatypeOssRepositoryStagingUrl>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>${sonatypeOssRepositorySnapshotUrl}</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshot Repository</name>
+			<url>${sonatypeOssRepositorySnapshotUrl}</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Sonatype Nexus Release-Staging Repository</name>
+			<url>${sonatypeOssRepositoryStagingUrl}</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<sourceDirectory>source/production/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>source/production/resources</directory>
+			</resource>
+		</resources>
+
+		<testSourceDirectory>source/test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>source/test/resources</directory>
+			</testResource>
+		</testResources>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>2.5.2</version>
+					<configuration>
+						<effort>Max</effort>
+					</configuration>
+					<executions>
+						<execution>
+							<id>findbugs-check</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.2</version>
+					<executions>
+						<execution>
+							<id>enforce-maven</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+										<message>
+											Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums
+											respectively.
+										</message>
+									</requireMavenVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<useReleaseProfile>false</useReleaseProfile>
+						<arguments>-Psonatype-oss-release</arguments>
+						<checkModificationExcludes>
+							<checkModificationExclude>workspace.xml</checkModificationExclude>
+						</checkModificationExcludes>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<executions />
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions />
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+
+		</plugins>
+	</reporting>
+
+	<profiles>
+		<profile>
+			<id>sonatype-oss-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
