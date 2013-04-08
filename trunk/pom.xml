@@ -41,9 +41,9 @@
 
 	<url>http://java.nicholaswilliams.net/</url>
 	<scm>
-		<url>scm:svn:http://svn.nicholaswilliams.net/browse/</url>
-		<connection>scm:svn:http://svn.nicholaswilliams.net/NWTSParent/</connection>
-		<developerConnection>scm:svn:svn://svn.nicholaswilliams.net/NWTSParent/</developerConnection>
+		<url>http://svn.nicholaswilliams.net/browse/</url>
+		<connection>scm:svn:http://svn.nicholaswilliams.net/NWTSParent/trunk</connection>
+		<developerConnection>scm:svn:svn://svn.nicholaswilliams.net/NWTSParent/trunk</developerConnection>
 	</scm>
 	<issueManagement>
 		<system>YouTrack</system>
