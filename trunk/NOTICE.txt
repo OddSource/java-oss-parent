@@ -1,0 +1,15 @@
+Licensing
+---------
+NWTS Parent
+Copyright (c) 2010-2013 Nicholas Williams
+Licensed under the Apache License version 2.0 (see LICENSE.txt)
+
+
+Contact
+-------
+
+    o For general information visit the main project site at
+      http://java.nicholaswilliams.net/
+
+    o For help and bug reports visit the issue tracker at
+      http://issues.java.nicholaswilliams.net/
