@@ -24,7 +24,7 @@
 	<packaging>pom</packaging>
 
 	<name>NWTSParent</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<description>
 		Parent POM for all NWTS Java Code projects.
 	</description>
@@ -39,9 +39,9 @@
 
 	<url>http://java.nicholaswilliams.net/</url>
 	<scm>
-		<url>http://svn.nicholaswilliams.net/browse/</url>
-		<connection>scm:svn:http://svn.nicholaswilliams.net/NWTSParent/trunk</connection>
-		<developerConnection>scm:svn:svn://svn.nicholaswilliams.net/NWTSParent/trunk</developerConnection>
+		<url>http://svn.nicholaswilliams.net/browse/tags/release-1.0</url>
+		<connection>scm:svn:http://svn.nicholaswilliams.net/NWTSParent/tags/release-1.0</connection>
+		<developerConnection>scm:svn:svn://svn.nicholaswilliams.net/NWTSParent/tags/release-1.0</developerConnection>
 	</scm>
 	<issueManagement>
 		<system>YouTrack</system>
