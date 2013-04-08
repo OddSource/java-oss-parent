@@ -173,7 +173,7 @@
 					<configuration>
 						<releaseProfiles>sonatype-oss-release</releaseProfiles>
 						<checkModificationExcludes>
-							<checkModificationExclude>/**/workspace.xml</checkModificationExclude>
+							<checkModificationExclude>workspace.xml</checkModificationExclude>
 						</checkModificationExcludes>
 					</configuration>
 				</plugin>
