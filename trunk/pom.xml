@@ -172,6 +172,9 @@
 					<version>2.1</version>
 					<configuration>
 						<releaseProfiles>sonatype-oss-release</releaseProfiles>
+						<checkModificationExcludes>
+							<checkModificationExclude>.idea/workspace.xml</checkModificationExclude>
+						</checkModificationExcludes>
 					</configuration>
 				</plugin>
 			</plugins>
