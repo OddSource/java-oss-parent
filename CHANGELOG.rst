@@ -8,6 +8,7 @@ Changelog
 - [MINOR] Reverted to ``maven-deploy-plugin``
 - [MINOR] Updated the Enforcer configuration to require one of the four current LTS Java versions
   (1.8, 11, 17, and 21).
+- [MINOR] Switch from Travis CI to GitHub Workflows
 
 2.2 (2019-01-26)
 ----------------
