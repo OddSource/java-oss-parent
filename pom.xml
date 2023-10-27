@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2010-2019 OddSource Code (license@oddsource.io)
+    Copyright © 2010-2023 OddSource Code (license@oddsource.io)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@
 
     <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <name>Apache-2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo,maven,manual</distribution>
         </license>
     </licenses>
@@ -77,25 +77,29 @@
         <gpg.keyname>5224F049F154E1FAA46C13C37B440CA3BEB1A41F</gpg.keyname>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <sonatypeOssRepositoryBaseUrl>https://oss.sonatype.org/</sonatypeOssRepositoryBaseUrl>
-        <sonatypeOssRepositorySnapshotUrl>https://oss.sonatype.org/content/repositories/snapshots</sonatypeOssRepositorySnapshotUrl>
-        <sonatypeOssRepositoryStagingUrl>https://oss.sonatype.org/service/local/staging/deploy/maven2</sonatypeOssRepositoryStagingUrl>
-        <version.plugin.checkstyle>3.0.0</version.plugin.checkstyle>
+        <distribution.repo.url.sonatype.base>https://oss.sonatype.org/</distribution.repo.url.sonatype.base>
+        <distribution.repo.url.sonatype.snapshot>${distribution.repo.url.sonatype.base}content/repositories/snapshots</distribution.repo.url.sonatype.snapshot>
+        <distribution.repo.url.sonatype.staging>${distribution.repo.url.sonatype.base}service/local/staging/deploy/maven2</distribution.repo.url.sonatype.staging>
+        <version.plugin.checkstyle>3.3.0</version.plugin.checkstyle>
         <version.plugin.checksum>1.8</version.plugin.checksum>
-        <version.plugin.deploy>2.8.2</version.plugin.deploy>
-        <version.plugin.enforcer>1.4.1</version.plugin.enforcer>
-        <version.plugin.gpg>1.6</version.plugin.gpg>
-        <version.plugin.install>2.5.2</version.plugin.install>
-        <version.plugin.license>3.0</version.plugin.license>
-        <version.plugin.nexus>1.6.8</version.plugin.nexus>
-        <version.plugin.spotbugs>3.1.8</version.plugin.spotbugs>
+        <version.plugin.compiler>3.11.0</version.plugin.compiler>
+        <version.plugin.deploy>3.1.1</version.plugin.deploy>
+        <version.plugin.enforcer>3.3.0</version.plugin.enforcer>
+        <version.plugin.gpg>3.1.0</version.plugin.gpg>
+        <version.plugin.install>3.1.1</version.plugin.install>
+        <version.plugin.jar>3.3.0</version.plugin.jar>
+        <version.plugin.javadoc>3.6.0</version.plugin.javadoc>
+        <version.plugin.license>4.2</version.plugin.license>
+        <version.plugin.source>3.3.0</version.plugin.source>
+        <version.plugin.spotbugs>4.7.3.6</version.plugin.spotbugs>
+        <maven.plugin.validation>VERBOSE</maven.plugin.validation>
     </properties>
 
     <repositories>
         <repository>
             <id>sonatype-nexus-snapshots</id>
             <name>Sonatype Nexus Snapshots</name>
-            <url>${sonatypeOssRepositorySnapshotUrl}</url>
+            <url>${distribution.repo.url.sonatype.snapshot}</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -106,15 +110,18 @@
     </repositories>
 
     <distributionManagement>
+        <!--<serverId>ossrh</serverId>
+        <nexusUrl>${sonatypeOssRepositoryBaseUrl}</nexusUrl>
+        <stagingProfileId>923db7f780e30f</stagingProfileId>-->
         <snapshotRepository>
             <id>sonatype-nexus-snapshots</id>
             <name>Sonatype Nexus Snapshot Repository</name>
-            <url>${sonatypeOssRepositorySnapshotUrl}</url>
+            <url>${distribution.repo.url.sonatype.snapshot}</url>
         </snapshotRepository>
         <repository>
             <id>sonatype-nexus-staging</id>
             <name>Sonatype Nexus Release-Staging Repository</name>
-            <url>${sonatypeOssRepositoryStagingUrl}</url>
+            <url>${distribution.repo.url.sonatype.staging}</url>
         </repository>
     </distributionManagement>
 
@@ -142,11 +149,14 @@
                     <inherited>true</inherited>
                     <configuration>
                         <effort>Max</effort>
+                        <excludeFilterFile>build/spotbugs-exclude.xml</excludeFilterFile>
                         <threshold>Low</threshold>
                         <xmlOutput>true</xmlOutput>
                     </configuration>
                     <executions>
                         <execution>
+                            <id>spotbugs-verify-check</id>
+                            <phase>verify</phase>
                             <goals>
                                 <goal>check</goal>
                             </goals>
@@ -171,7 +181,7 @@
                                         <version>[3.0.5,4.0)</version>
                                     </requireMavenVersion>
                                     <requireJavaVersion>
-                                        <version>[1.8,1.9),[1.10,1.12),[8.0,9),[10.0,12)</version>
+                                        <version>[11.0,12),[17.0,18),[21.0,22)</version>
                                     </requireJavaVersion>
                                 </rules>
                             </configuration>
@@ -187,7 +197,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>8.16</version>
+                            <version>10.9.1</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -197,14 +207,21 @@
                                     <property name="max" value="1500" />
                                 </module>
                                 <module name="FileTabCharacter" />
+                                <module name="LineLength">
+                                    <property name="max" value="120" />
+                                </module>
                                 <module name="JavadocPackage" />
                                 <module name="NewlineAtEndOfFile" />
+                                <module name="BeforeExecutionExclusionFileFilter">
+                                    <property name="fileNamePattern" value="module\-info\.java$"/>
+                                </module>
+                                <module name="SuppressWarningsFilter" />
                                 <module name="TreeWalker">
                                     <module name="AbbreviationAsWordInName">
                                         <property name="ignoreFinal" value="true" />
                                         <property name="ignoreStatic" value="true" />
                                         <property name="allowedAbbreviationLength" value="0" />
-                                        <property name="allowedAbbreviations" value="CSV,DSA,FTP,HTML,HTTP,HTTPS,IP,RSA,SCP,SFTP,SMTP,SMTPS,SSH,TCP,TSV,UDP,UID,URI,URL,XML,YML,YAML" />
+                                        <property name="allowedAbbreviations" value="CSV,DSA,FTP,HTML,HTTP,HTTPS,I,IP,RSA,SCP,SFTP,SMTP,SMTPS,SSH,TCP,TSV,UDP,UID,URI,URL,XML,YML,YAML" />
                                     </module>
                                     <module name="AnnotationLocation">
                                         <property name="allowSamelineMultipleAnnotations" value="false" />
@@ -223,7 +240,8 @@
                                     <module name="CovariantEquals" />
                                     <module name="CustomImportOrder">
                                         <property name="customImportOrderRules"
-                                                  value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SAME_PACKAGE(3)" />
+                                                  value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS###SAME_PACKAGE(4)" />
+                                        <property name="specialImportsRegExp" value="^io\.oddsource\.java\." />
                                         <property name="separateLineBetweenGroups" value="true" />
                                         <property name="sortImportsInGroupAlphabetically" value="true" />
                                     </module>
@@ -259,9 +277,8 @@
                                     <module name="InterfaceIsType">
                                         <property name="allowMarkerInterfaces" value="true" />
                                     </module>
-                                    <module name="InterfaceMemberImpliedModifier" />
                                     <module name="JavadocMethod">
-                                        <property name="scope" value="protected" />
+                                        <property name="accessModifiers" value="protected" />
                                     </module>
                                     <module name="JavadocParagraph">
                                         <property name="allowNewlineParagraph" value="true" />
@@ -288,9 +305,6 @@
                                         <property name="option" value="eol" />
                                         <property name="tokens" value="LAMBDA" />
                                     </module>
-                                    <module name="LineLength">
-                                        <property name="max" value="120" />
-                                    </module>
                                     <module name="MagicNumber">
                                         <property name="ignoreAnnotation" value="true" />
                                         <property name="ignoreHashCodeMethod" value="true" />
@@ -307,7 +321,15 @@
                                     <module name="ModifiedControlVariable">
                                         <property name="skipEnhancedForLoopVariable" value="true" />
                                     </module>
-                                    <module name="MultipleStringLiterals" />
+                                    <module name="MultipleStringLiterals">
+                                        <!--
+                                        This doesn't work until the following issue is fixed:
+                                        https://issues.apache.org/jira/browse/MCHECKSTYLE-442
+                                        <property name="ignoreStringsRegexp"
+                                                  value="^((&quot;&quot;)|(&quot; &quot;)|(&quot;, &quot;))$" />
+                                        -->
+                                        <property name="allowedDuplicates" value="3" />
+                                    </module>
                                     <module name="MultipleVariableDeclarations" />
                                     <module name="MutableException" />
                                     <module name="NeedBraces" />
@@ -357,6 +379,7 @@
                                         <property name="option" value="nospace" />
                                     </module>
                                     <module name="RedundantImport" />
+                                    <module name="RedundantModifier" />
                                     <module name="RequireThis" />
                                     <module name="ReturnCount">
                                         <property name="max" value="3" />
@@ -376,6 +399,7 @@
                                     <module name="StringLiteralEquality" />
                                     <module name="SuperClone" />
                                     <module name="SuperFinalize" />
+                                    <module name="SuppressWarningsHolder" />
                                     <module name="ThrowsCount">
                                         <property name="ignorePrivateMethods" value="true" />
                                         <property name="max" value="4" />
@@ -409,7 +433,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>verify-style</id>
+                            <id>checkstyle-verify-style</id>
                             <phase>verify</phase>
                             <goals>
                                 <goal>check</goal>
@@ -423,38 +447,47 @@
                     <version>${version.plugin.license}</version>
                     <inherited>true</inherited>
                     <configuration>
-                        <excludes>
-                            <exclude>**/*.dylib</exclude>
-                            <exclude>**/*.enc</exclude>
-                            <exclude>**/*.key</exclude>
-                            <exclude>**/*.lib</exclude>
-                            <exclude>**/*.rst</exclude>
-                            <exclude>**/*.txt</exclude>
-                            <exclude>**/.gitkeep</exclude>
-                            <exclude>**/io_oddsource_java*.h</exclude><!--Auto-generated JNI headers-->
-                        </excludes>
-                        <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                        <licenseSets>
+                            <licenseSet>
+                                <excludes>
+                                    <exclude>**/*.dylib</exclude>
+                                    <exclude>**/*.enc</exclude>
+                                    <exclude>**/*.key</exclude>
+                                    <exclude>**/*.lib</exclude>
+                                    <exclude>**/*.rst</exclude>
+                                    <exclude>**/*.txt</exclude>
+                                    <exclude>**/.gitkeep</exclude>
+                                    <exclude>**/.gitignore</exclude>
+                                    <exclude>**/*.properties</exclude><!-- Plugin has a hard time with these -->
+                                    <exclude>**/io_oddsource_java*.h</exclude><!-- Auto-generated JNI headers -->
+                                </excludes>
+                                <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                                <properties>
+                                    <owner>OddSource Code</owner>
+                                    <email>license@oddsource.io</email>
+                                    <year>2010-2023</year>
+                                </properties>
+                            </licenseSet>
+                        </licenseSets>
                         <mapping>
                             <c>SLASHSTAR_STYLE</c>
                             <cpp>SLASHSTAR_STYLE</cpp>
                             <Dockerfile-jdk8>SCRIPT_STYLE</Dockerfile-jdk8>
                             <Dockerfile-jdk11>SCRIPT_STYLE</Dockerfile-jdk11>
+                            <Dockerfile-jdk17>SCRIPT_STYLE</Dockerfile-jdk17>
+                            <Dockerfile-jdk21>SCRIPT_STYLE</Dockerfile-jdk21>
                             <groovy>SLASHSTAR_STYLE</groovy>
                             <h>SLASHSTAR_STYLE</h>
                             <java>SLASHSTAR_STYLE</java>
                             <Makefile>SCRIPT_STYLE</Makefile>
+                            <properties>SCRIPT_STYLE</properties>
                             <yaml>SCRIPT_STYLE</yaml>
                             <yml>SCRIPT_STYLE</yml>
                         </mapping>
-                        <properties>
-                            <owner>OddSource Code</owner>
-                            <email>license@oddsource.io</email>
-                            <project.inceptionYear>2010-2019</project.inceptionYear>
-                        </properties>
                     </configuration>
                     <executions>
                         <execution>
-                            <id>verify-license</id>
+                            <id>license-verify-check</id>
                             <phase>verify</phase>
                             <goals>
                                 <goal>check</goal>
@@ -486,40 +519,11 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!--At a future date we'll need to use this, because the upcoming version of maven-install-plugin
-                    does not create checksums. However, right now this plugin does not work. We may have to roll our
-                    own.-->
-                <!--<plugin>
-                    <groupId>net.nicoulaj.maven.plugins</groupId>
-                    <artifactId>checksum-maven-plugin</artifactId>
-                    <version>${version.plugin.checksum}</version>
-                    <inherited>true</inherited>
-                    <configuration>
-                        <algorithms>
-                            <algorithm>MD5</algorithm>
-                            <algorithm>SHA-1</algorithm>
-                        </algorithms>
-                        <attachChecksums>true</attachChecksums>
-                        <failOnError>true</failOnError>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>checksum-artifacts</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>artifacts</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${version.plugin.install}</version>
                     <inherited>true</inherited>
-                    <configuration>
-                        <createChecksum>true</createChecksum>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -527,18 +531,6 @@
                     <version>${version.plugin.deploy}</version>
                     <inherited>true</inherited>
                     <configuration>
-                        <skip>true</skip>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>${version.plugin.nexus}</version>
-                    <inherited>true</inherited>
-                    <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>${sonatypeOssRepositoryBaseUrl}</nexusUrl>
-                        <stagingProfileId>923db7f780e30f</stagingProfileId>
                     </configuration>
                     <executions>
                         <execution>
@@ -570,10 +562,6 @@
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
 
@@ -592,11 +580,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                     </plugin>
-                    <!--See comment above -->
-                    <!--<plugin>
-                        <groupId>net.nicoulaj.maven.plugins</groupId>
-                        <artifactId>checksum-maven-plugin</artifactId>
-                    </plugin>-->
                 </plugins>
             </build>
         </profile>
