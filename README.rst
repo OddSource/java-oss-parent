@@ -1,8 +1,8 @@
 OddSource OSS Parent
 ====================
 
-.. image:: https://api.travis-ci.org/OddSource/java-oss-parent.svg
-    :target: https://travis-ci.org/OddSource/java-oss-parent
+.. image:: https://github.com/OddSource/java-oss-parent/actions/workflows/maven.yml/badge.svg
+    :target: https://github.com/OddSource/java-oss-parent/actions/workflows/maven.yml
 
 .. image:: https://img.shields.io/github/license/OddSource/java-oss-parent.svg
     :target: https://github.com/OddSource/java-oss-parent/blob/master/LICENSE.txt
