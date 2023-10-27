@@ -21,7 +21,7 @@ Java projects sponsored and hosted by OddSource Code must put the following at t
     <parent>
         <groupId>io.oddsource.java</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>2.0</version>
+        <version>2.3</version>
     </parent>
 
 Coding Standards
@@ -58,7 +58,8 @@ full code styling rules, see the Checkstyle config in ``pom.xml``.
 
   * Standard ``java`` and ``javax`` imports
   * Third party imports
-  * Imports starting with ``io.oddsource.java``
+  * External imports starting with ``io.oddsource.java``
+  * Internal imports from the same project
 
 * There shall be one blank line between the package statement and imports, between imports and class definition,
   between class definitions, between class field definitions, and between constructor and method definitions.
@@ -71,6 +72,6 @@ full code styling rules, see the Checkstyle config in ``pom.xml``.
   than two ``return`` statements.
 * Methods and constructors shall not ``throws`` more than four different exception types.
 * Any native code, which should be rare, shall be compiled and bundled within the JAR of the code that uses it for
-  easier distributions. A given JAR should contain a ``.dll`` for Windows, a ``.so`` for Linux, and a separate ``.so``
-  for macOS if the Linux shared library is not compatible with macOS. Other, more obscure operating systems shall not
-  be required to be supported with bundled libraries.
+  easier distributions. A given JAR should contain a ``.dll`` for Windows, an ``.so`` for Linux (or multiple ``.so``
+  files for different Linux distributions, if necessary), and a ``.dylib`` for macOS. Other, more obscure operating
+  systems shall not be required to be supported with bundled libraries, but may.

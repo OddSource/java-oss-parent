@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.3 (2023-10-??)
+----------------
+- [MINOR] Bumped several plugin versions because it has been four years since the last update
+- [MINOR] Made improvements to Checkstyle configuration in alignment with latest version
+- [MINOR] Reverted to ``maven-deploy-plugin``
+- [MINOR] Updated the Enforcer configuration to require one of the four current LTS Java versions
+  (1.8, 11, 17, and 21).
+
 2.2 (2019-01-26)
 ----------------
 - [MINOR] Some improvements to support needs of Raw Sockets
@@ -14,7 +22,7 @@ Changelog
 ----------------
 - [MAJOR] Re-branded all projects from NWTSJavaCode to OddSource Code
 - [MAJOR] Switched to using Travis CI for all continuous integration
-- [MAJOR] Switched to the `nexus-staging-maven-plugin` for deployments instead of `maven-deploy-plugin`
+- [MAJOR] Switched to the ``nexus-staging-maven-plugin`` for deployments instead of ``maven-deploy-plugin``
 - [MAJOR] Switched from tabs to spaces
 - [MINOR] Codified explicit code style rules
 - [MINOR] Configured mandatory license header check in Maven build
