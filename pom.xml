@@ -25,7 +25,7 @@
     <packaging>pom</packaging>
 
     <name>OddSource OSS Parent</name>
-    <version>2.3-SNAPSHOT</version>
+    <version>2.3.0</version>
     <description>
         Parent POM for all OddSource Java Code projects.
     </description>
@@ -74,7 +74,7 @@
     </contributors>
 
     <properties>
-        <gpg.keyname>5224F049F154E1FAA46C13C37B440CA3BEB1A41F</gpg.keyname>
+        <gpg.keyname>1AD267184ADD933C9C6D48E4FE2E2E95AC572F8F</gpg.keyname>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <distribution.repo.url.sonatype.base>https://oss.sonatype.org/</distribution.repo.url.sonatype.base>
@@ -110,9 +110,6 @@
     </repositories>
 
     <distributionManagement>
-        <!--<serverId>ossrh</serverId>
-        <nexusUrl>${sonatypeOssRepositoryBaseUrl}</nexusUrl>
-        <stagingProfileId>923db7f780e30f</stagingProfileId>-->
         <snapshotRepository>
             <id>sonatype-nexus-snapshots</id>
             <name>Sonatype Nexus Snapshot Repository</name>
@@ -501,11 +498,6 @@
                     <version>${version.plugin.gpg}</version>
                     <inherited>true</inherited>
                     <configuration>
-                        <!--Uncomment the following (and remove the extra space between hyphens) for GnuPG >= 2.1-->
-                        <!--<gpgArguments>
-                            <arg>- -pinentry-mode</arg>
-                            <arg>loopback</arg>
-                        </gpgArguments>-->
                         <keyname>${gpg.keyname}</keyname>
                         <passphraseServerId>${gpg.keyname}</passphraseServerId>
                     </configuration>
