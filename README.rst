@@ -24,6 +24,14 @@ Java projects sponsored and hosted by OddSource Code must put the following at t
         <version>2.3</version>
     </parent>
 
+Simple projects under the OddSource umbrella should be able to releasing using the following steps::
+
+    # update changelogs and version in POM to remove SNAPSHOT, commit, and push, wait for CI to approve
+    # then, to sign artifacts and deploy to staging:
+    $ mvn -P sign deploy
+    # then, log in to Sonatype, check the staging repostory for sanity, close it, and promote it
+    # (or, drop it and try again if something needs to be fixed)
+
 Coding Standards
 ----------------
 

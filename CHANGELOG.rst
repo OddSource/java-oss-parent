@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.3 (2023-10-??)
-----------------
+2.3.0 (2023-10-27)
+------------------
 - [MINOR] Bumped several plugin versions because it has been four years since the last update
 - [MINOR] Made improvements to Checkstyle configuration in alignment with latest version
 - [MINOR] Reverted to ``maven-deploy-plugin``
