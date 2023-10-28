@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.3.1 (2023-10-28)
+------------------
+- [PATCH] Reverted to Checkstyle 9.3 due to 10.x's requiring Java 11
+
 2.3.0 (2023-10-27)
 ------------------
 - [MINOR] Bumped several plugin versions because it has been four years since the last update
