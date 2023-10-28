@@ -21,7 +21,7 @@ Java projects sponsored and hosted by OddSource Code must put the following at t
     <parent>
         <groupId>io.oddsource.java</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>2.3</version>
+        <version>2.3.0</version>
     </parent>
 
 Simple projects under the OddSource umbrella should be able to releasing using the following steps::
