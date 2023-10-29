@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.4.0 (2023-10-28)
+------------------
+- [MINOR] Use a different structure with an oss-build-resources module that distributes checkstyle config
+
 2.3.1 (2023-10-28)
 ------------------
 - [PATCH] Reverted to Checkstyle 9.3 due to 10.x's requiring Java 11
