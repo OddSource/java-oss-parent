@@ -22,13 +22,17 @@
 
     <groupId>io.oddsource.java</groupId>
     <artifactId>oss-parent</artifactId>
+    <version>2.4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OddSource OSS Parent</name>
-    <version>2.3.1</version>
     <description>
         Parent POM for all OddSource Java Code projects.
     </description>
+
+    <modules>
+        <module>oss-build-resources</module>
+    </modules>
 
     <licenses>
         <license>
@@ -48,10 +52,6 @@
         <system>GitHub Issues</system>
         <url>https://github.com/OddSource/java-oss-parent/issues</url>
     </issueManagement>
-    <ciManagement>
-        <system>Travis CI</system>
-        <url>https://travis-ci.org/OddSource/java-oss-parent</url>
-    </ciManagement>
     <inceptionYear>2010</inceptionYear>
 
     <organization>
@@ -196,236 +196,24 @@
                             <artifactId>checkstyle</artifactId>
                             <version>9.3</version>
                         </dependency>
+                        <dependency>
+                            <groupId>io.oddsource.java</groupId>
+                            <artifactId>oss-build-resources</artifactId>
+                            <version>2.4.0-SNAPSHOT</version>
+                        </dependency>
                     </dependencies>
                     <configuration>
-                        <checkstyleRules>
-                            <module name="Checker">
-                                <module name="FileLength">
-                                    <property name="max" value="1500" />
-                                </module>
-                                <module name="FileTabCharacter" />
-                                <module name="LineLength">
-                                    <property name="max" value="120" />
-                                </module>
-                                <module name="JavadocPackage" />
-                                <module name="NewlineAtEndOfFile" />
-                                <module name="BeforeExecutionExclusionFileFilter">
-                                    <property name="fileNamePattern" value="module\-info\.java$"/>
-                                </module>
-                                <module name="SuppressWarningsFilter" />
-                                <module name="TreeWalker">
-                                    <module name="AbbreviationAsWordInName">
-                                        <property name="ignoreFinal" value="true" />
-                                        <property name="ignoreStatic" value="true" />
-                                        <property name="allowedAbbreviationLength" value="0" />
-                                        <property name="allowedAbbreviations" value="CSV,DSA,FTP,HTML,HTTP,HTTPS,I,IP,RSA,SCP,SFTP,SMTP,SMTPS,SSH,TCP,TSV,UDP,UID,URI,URL,XML,YML,YAML" />
-                                    </module>
-                                    <module name="AnnotationLocation">
-                                        <property name="allowSamelineMultipleAnnotations" value="false" />
-                                        <property name="allowSamelineParameterizedAnnotation" value="true" />
-                                        <property name="allowSamelineSingleParameterlessAnnotation" value="true" />
-                                    </module>
-                                    <module name="AnonInnerLength" />
-                                    <module name="ArrayTrailingComma" />
-                                    <module name="AtclauseOrder">
-                                        <property name="tagOrder" value="@param,@return,@throws,@exception,@see,@serial,@serialField,@serialData,@deprecated,@author,@version,@since"/>
-                                    </module>
-                                    <module name="AvoidNestedBlocks" />
-                                    <module name="AvoidStarImport" />
-                                    <module name="AvoidStaticImport" />
-                                    8.1.6 <module name="ClassMemberImpliedModifier" />
-                                    <module name="CovariantEquals" />
-                                    <module name="CustomImportOrder">
-                                        <property name="customImportOrderRules"
-                                                  value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS###SAME_PACKAGE(4)" />
-                                        <property name="specialImportsRegExp" value="^io\.oddsource\.java\." />
-                                        <property name="separateLineBetweenGroups" value="true" />
-                                        <property name="sortImportsInGroupAlphabetically" value="true" />
-                                    </module>
-                                    <module name="DeclarationOrder">
-                                        <!--Static variables, instance variables, constructors, methods-->
-                                    </module>
-                                    <module name="DefaultComesLast" />
-                                    <module name="EmptyBlock" />
-                                    <module name="EmptyCatchBlock">
-                                        <property name="exceptionVariableName" value="expected|ignore" />
-                                    </module>
-                                    <module name="EmptyLineSeparator">
-                                        <property name="tokens" value="CLASS_DEF,CTOR_DEF,ENUM_DEF,IMPORT,INSTANCE_INIT,INTERFACE_DEF,METHOD_DEF,STATIC_IMPORT,STATIC_INIT,VARIABLE_DEF" />
-                                    </module>
-                                    <module name="EmptyStatement" />
-                                    <module name="EqualsAvoidNull" />
-                                    <module name="EqualsHashCode" />
-                                    <module name="ExecutableStatementCount">
-                                        <property name="max" value="50" />
-                                    </module>
-                                    <module name="ExplicitInitialization" />
-                                    <module name="FallThrough" />
-                                    <module name="FinalClass" />
-                                    <module name="FinalLocalVariable" />
-                                    <module name="FinalParameters" />
-                                    <module name="GenericWhitespace" />
-                                    <module name="HideUtilityClassConstructor" />
-                                    <module name="IllegalCatch" />
-                                    <module name="IllegalImport" />
-                                    <module name="IllegalThrows" />
-                                    <module name="InnerAssignment" />
-                                    <module name="InnerTypeLast" />
-                                    <module name="InterfaceIsType">
-                                        <property name="allowMarkerInterfaces" value="true" />
-                                    </module>
-                                    <module name="JavadocMethod">
-                                        <property name="accessModifiers" value="protected" />
-                                    </module>
-                                    <module name="JavadocParagraph">
-                                        <property name="allowNewlineParagraph" value="true" />
-                                    </module>
-                                    <module name="JavadocStyle">
-                                        <property name="scope" value="protected" />
-                                    </module>
-                                    <module name="JavadocTagContinuationIndentation" />
-                                    <module name="JavadocType">
-                                        <property name="scope" value="protected" />
-                                    </module>
-                                    <module name="JavadocVariable">
-                                        <property name="scope" value="public" />
-                                    </module>
-                                    <module name="LeftCurly">
-                                        <property name="ignoreEnums" value="false" />
-                                        <property name="option" value="nl" />
-                                        <!--Everything except lambdas-->
-                                        <property name="tokens"
-                                                  value="ANNOTATION_DEF,CLASS_DEF,CTOR_DEF,ENUM_CONSTANT_DEF,ENUM_DEF,INTERFACE_DEF,LITERAL_CASE,LITERAL_CATCH,LITERAL_DEFAULT,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_SWITCH,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,METHOD_DEF,OBJBLOCK,STATIC_INIT" />
-                                    </module>
-                                    <module name="LeftCurly">
-                                        <property name="ignoreEnums" value="true" />
-                                        <property name="option" value="eol" />
-                                        <property name="tokens" value="LAMBDA" />
-                                    </module>
-                                    <module name="MagicNumber">
-                                        <property name="ignoreAnnotation" value="true" />
-                                        <property name="ignoreHashCodeMethod" value="true" />
-                                    </module>
-                                    <module name="MethodLength">
-                                        <property name="max" value="50" />
-                                    </module>
-                                    <module name="MethodParamPad">
-                                        <property name="allowLineBreaks" value="false" />
-                                        <property name="option" value="nospace" />
-                                    </module>
-                                    <module name="MissingCtor" />
-                                    <module name="MissingSwitchDefault" />
-                                    <module name="ModifiedControlVariable">
-                                        <property name="skipEnhancedForLoopVariable" value="true" />
-                                    </module>
-                                    <module name="MultipleStringLiterals">
-                                        <!--
-                                        This doesn't work until the following issue is fixed:
-                                        https://issues.apache.org/jira/browse/MCHECKSTYLE-442
-                                        <property name="ignoreStringsRegexp"
-                                                  value="^((&quot;&quot;)|(&quot; &quot;)|(&quot;, &quot;))$" />
-                                        -->
-                                        <property name="allowedDuplicates" value="3" />
-                                    </module>
-                                    <module name="MultipleVariableDeclarations" />
-                                    <module name="MutableException" />
-                                    <module name="NeedBraces" />
-                                    <module name="NestedForDepth">
-                                        <property name="max" value="2" />
-                                    </module>
-                                    <module name="NestedIfDepth">
-                                        <property name="max" value="2" />
-                                    </module>
-                                    <module name="NestedTryDepth">
-                                        <property name="max" value="2" />
-                                    </module>
-                                    <module name="NonEmptyAtclauseDescription" />
-                                    <module name="NoWhitespaceAfter">
-                                        <property name="allowLineBreaks" value="false" />
-                                        <property name="tokens" value="AT,BNOT,DEC,INC,LITERAL_SYNCHRONIZED,LNOT" />
-                                    </module>
-                                    <module name="NoWhitespaceAfter">
-                                        <property name="allowLineBreaks" value="true" />
-                                        <property name="tokens"
-                                                  value="ARRAY_DECLARATOR,ARRAY_INIT,DOT,INDEX_OP,METHOD_REF,UNARY_MINUS,UNARY_PLUS" />
-                                    </module>
-                                    <module name="NoWhitespaceBefore">
-                                        <property name="allowLineBreaks" value="false" />
-                                        <property name="tokens" value="COMMA,DOT,ELLIPSIS,METHOD_REF,POST_INC,POST_DEC,SEMI" />
-                                    </module>
-                                    <module name="NoWhitespaceBefore">
-                                        <property name="allowLineBreaks" value="true" />
-                                        <property name="tokens" value="GENERIC_END,GENERIC_START" />
-                                    </module>
-                                    <module name="OneStatementPerLine" />
-                                    <module name="OneTopLevelClass" />
-                                    <module name="OperatorWrap">
-                                        <property name="option" value="eol" />
-                                    </module>
-                                    <module name="OuterTypeFilename" />
-                                    <module name="OuterTypeNumber" />
-                                    <module name="OverloadMethodsDeclarationOrder" />
-                                    <module name="PackageDeclaration">
-                                        <property name="matchDirectoryStructure" value="true" />
-                                    </module>
-                                    <module name="ParameterAssignment" />
-                                    <module name="ParameterNumber">
-                                        <property name="max" value="10" />
-                                    </module>
-                                    <module name="ParenPad">
-                                        <property name="option" value="nospace" />
-                                    </module>
-                                    <module name="RedundantImport" />
-                                    <module name="RedundantModifier" />
-                                    <module name="RequireThis" />
-                                    <module name="ReturnCount">
-                                        <property name="max" value="3" />
-                                        <property name="maxForVoid" value="3" />
-                                    </module>
-                                    <module name="RightCurly">
-                                        <property name="option" value="alone" />
-                                    </module>
-                                    <module name="SeparatorWrap">
-                                        <property name="option" value="eol" />
-                                    </module>
-                                    <module name="SimplifyBooleanExpression" />
-                                    <module name="SimplifyBooleanReturn" />
-                                    <module name="SingleSpaceSeparator">
-                                        <property name="validateComments" value="false" />
-                                    </module>
-                                    <module name="StringLiteralEquality" />
-                                    <module name="SuperClone" />
-                                    <module name="SuperFinalize" />
-                                    <module name="SuppressWarningsHolder" />
-                                    <module name="ThrowsCount">
-                                        <property name="ignorePrivateMethods" value="true" />
-                                        <property name="max" value="4" />
-                                    </module>
-                                    <module name="TypecastParenPad">
-                                        <property name="option" value="nospace" />
-                                    </module>
-                                    <module name="UnnecessaryParentheses" />
-                                    <module name="UnusedImports" />
-                                    <module name="VariableDeclarationUsageDistance" />
-                                    <module name="VisibilityModifier">
-                                        <property name="allowPublicImmutableFields" value="true" />
-                                    </module>
-                                    <module name="WhitespaceAfter">
-                                        <property name="tokens" value="COMMA,SEMI,TYPECAST"/>
-                                    </module>
-                                </module>
-                            </module>
-                        </checkstyleRules>
+                        <configLocation>io/oddsource/java/checkstyle.xml</configLocation>
                         <consoleOutput>true</consoleOutput>
                         <failOnViolation>true</failOnViolation>
-                        <failsOnError>false</failsOnError>
+                        <failsOnError>true</failsOnError>
                         <includeResources>true</includeResources>
                         <includes>**\/*.java</includes>
                         <includeTestResources>true</includeTestResources>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
                         <logViolationsToConsole>true</logViolationsToConsole>
                         <resourceIncludes>**\/*.properties</resourceIncludes>
-                        <suppressionsLocation>build/checkstyle-suppressions.xml</suppressionsLocation>
+                        <suppressionsLocation>io/oddsource/java/checkstyle-suppressions.xml</suppressionsLocation>
                         <violationSeverity>warning</violationSeverity>
                     </configuration>
                     <executions>
@@ -553,6 +341,14 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

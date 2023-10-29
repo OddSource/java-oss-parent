@@ -1,4 +1,5 @@
 .idea/
 *.iml
-.travis.gpg
-target
+.DS_Store
+target/
+out/
