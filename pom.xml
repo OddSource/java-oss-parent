@@ -204,6 +204,7 @@
                                     <exclude>**/.gitignore</exclude>
                                     <exclude>**/*.properties</exclude><!-- Plugin has a hard time with these -->
                                     <exclude>**/io_oddsource_java*.h</exclude><!-- Auto-generated JNI headers -->
+                                    <exclude>replace_version.sh</exclude><!-- Plugin can't handle the shebang -->
                                 </excludes>
                                 <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
                                 <properties>
