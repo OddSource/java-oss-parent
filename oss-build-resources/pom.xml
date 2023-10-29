@@ -20,7 +20,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.oddsource.java</groupId>
+    <parent>
+        <groupId>io.oddsource.java</groupId>
+        <artifactId>oss-grandparent</artifactId>
+        <version>2.4.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>oss-build-resources</artifactId>
     <version>2.4.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -29,46 +34,6 @@
     <description>
         Contains build tools and other resources for OddSource child projects
     </description>
-
-    <licenses>
-        <license>
-            <name>Apache-2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo,maven,manual</distribution>
-        </license>
-    </licenses>
-
-    <url>http://oddsource.io/</url>
-    <scm>
-        <url>https://github.com/OddSource/java-oss-parent</url>
-        <connection>scm:git:https://github.com/OddSource/java-oss-parent.git</connection>
-        <developerConnection>scm:git:git@github.com:OddSource/java-oss-parent.git</developerConnection>
-    </scm>
-    <issueManagement>
-        <system>GitHub Issues</system>
-        <url>https://github.com/OddSource/java-oss-parent/issues</url>
-    </issueManagement>
-    <inceptionYear>2010</inceptionYear>
-
-    <organization>
-        <name>OddSource Code</name>
-        <url>http://oddsource.io/</url>
-    </organization>
-
-    <developers>
-        <developer>
-            <id>nicholas.williams</id>
-            <name>Nick Williams</name>
-            <email>nicholas@nicholaswilliams.net</email>
-            <url>http://www.nicholaswilliams.net</url>
-            <timezone>America/Chicago</timezone>
-        </developer>
-    </developers>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
 
     <build>
         <resources>

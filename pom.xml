@@ -21,17 +21,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.oddsource.java</groupId>
-    <artifactId>oss-parent</artifactId>
+    <artifactId>oss-grandparent</artifactId>
     <version>2.4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>OddSource OSS Parent</name>
+    <name>OddSource OSS Grandparent</name>
     <description>
-        Parent POM for all OddSource Java Code projects.
+        Grandparent POM for all OddSource Java Code projects and the build resources project.
     </description>
 
     <modules>
         <module>oss-build-resources</module>
+        <module>oss-parent</module>
     </modules>
 
     <licenses>
@@ -80,7 +81,6 @@
         <distribution.repo.url.sonatype.base>https://oss.sonatype.org/</distribution.repo.url.sonatype.base>
         <distribution.repo.url.sonatype.snapshot>${distribution.repo.url.sonatype.base}content/repositories/snapshots</distribution.repo.url.sonatype.snapshot>
         <distribution.repo.url.sonatype.staging>${distribution.repo.url.sonatype.base}service/local/staging/deploy/maven2</distribution.repo.url.sonatype.staging>
-        <version.plugin.checkstyle>3.3.0</version.plugin.checkstyle>
         <version.plugin.checksum>1.8</version.plugin.checksum>
         <version.plugin.compiler>3.11.0</version.plugin.compiler>
         <version.plugin.deploy>3.1.1</version.plugin.deploy>
@@ -182,47 +182,6 @@
                                     </requireJavaVersion>
                                 </rules>
                             </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${version.plugin.checkstyle}</version>
-                    <inherited>true</inherited>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>9.3</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>io.oddsource.java</groupId>
-                            <artifactId>oss-build-resources</artifactId>
-                            <version>2.4.0-SNAPSHOT</version>
-                        </dependency>
-                    </dependencies>
-                    <configuration>
-                        <configLocation>io/oddsource/java/checkstyle.xml</configLocation>
-                        <consoleOutput>true</consoleOutput>
-                        <failOnViolation>true</failOnViolation>
-                        <failsOnError>true</failsOnError>
-                        <includeResources>true</includeResources>
-                        <includes>**\/*.java</includes>
-                        <includeTestResources>true</includeTestResources>
-                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                        <logViolationsToConsole>true</logViolationsToConsole>
-                        <resourceIncludes>**\/*.properties</resourceIncludes>
-                        <suppressionsLocation>io/oddsource/java/checkstyle-suppressions.xml</suppressionsLocation>
-                        <violationSeverity>warning</violationSeverity>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>checkstyle-verify-style</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -333,10 +292,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.mycila</groupId>
