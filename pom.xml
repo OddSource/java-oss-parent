@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2010-2023 OddSource Code (license@oddsource.io)
+    Copyright © 2010-2026 OddSource Code (license@oddsource.io)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 
     <groupId>io.oddsource.java</groupId>
     <artifactId>oss-grandparent</artifactId>
-    <version>2.4.0</version>
+    <version>2.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OddSource OSS Grandparent</name>
@@ -43,7 +43,7 @@
         </license>
     </licenses>
 
-    <url>http://oddsource.io/</url>
+    <url>https://oddsource.io/</url>
     <scm>
         <url>https://github.com/OddSource/java-oss-parent</url>
         <connection>scm:git:https://github.com/OddSource/java-oss-parent.git</connection>
@@ -57,7 +57,7 @@
 
     <organization>
         <name>OddSource Code</name>
-        <url>http://oddsource.io/</url>
+        <url>https://oddsource.io/</url>
     </organization>
 
     <developers>
@@ -65,7 +65,7 @@
             <id>nicholas.williams</id>
             <name>Nick Williams</name>
             <email>nicholas@nicholaswilliams.net</email>
-            <url>http://www.nicholaswilliams.net</url>
+            <url>https://www.nicholaswilliams.net</url>
             <timezone>America/Chicago</timezone>
         </developer>
     </developers>
@@ -81,17 +81,18 @@
         <distribution.repo.url.sonatype.base>https://oss.sonatype.org/</distribution.repo.url.sonatype.base>
         <distribution.repo.url.sonatype.snapshot>${distribution.repo.url.sonatype.base}content/repositories/snapshots</distribution.repo.url.sonatype.snapshot>
         <distribution.repo.url.sonatype.staging>${distribution.repo.url.sonatype.base}service/local/staging/deploy/maven2</distribution.repo.url.sonatype.staging>
+        <version.plugin.build.helper>3.6.1</version.plugin.build.helper>
         <version.plugin.checksum>1.8</version.plugin.checksum>
         <version.plugin.compiler>3.11.0</version.plugin.compiler>
-        <version.plugin.deploy>3.1.1</version.plugin.deploy>
-        <version.plugin.enforcer>3.3.0</version.plugin.enforcer>
-        <version.plugin.gpg>3.1.0</version.plugin.gpg>
-        <version.plugin.install>3.1.1</version.plugin.install>
+        <version.plugin.deploy>3.1.4</version.plugin.deploy>
+        <version.plugin.enforcer>3.6.2</version.plugin.enforcer>
+        <version.plugin.gpg>3.2.8</version.plugin.gpg>
+        <version.plugin.install>3.1.4</version.plugin.install>
         <version.plugin.jar>3.3.0</version.plugin.jar>
         <version.plugin.javadoc>3.6.0</version.plugin.javadoc>
-        <version.plugin.license>4.2</version.plugin.license>
+        <version.plugin.license>4.6</version.plugin.license>
         <version.plugin.source>3.3.0</version.plugin.source>
-        <version.plugin.spotbugs>4.7.3.6</version.plugin.spotbugs>
+        <version.plugin.spotbugs>4.9.8.3</version.plugin.spotbugs>
         <maven.plugin.validation>VERBOSE</maven.plugin.validation>
     </properties>
 
@@ -139,6 +140,25 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${version.plugin.build.helper}</version>
+                    <executions>
+                        <execution>
+                            <id>timestamp-property</id>
+                            <goals>
+                                <goal>timestamp-property</goal>
+                            </goals>
+                            <phase>validate</phase>
+                            <configuration>
+                                <locale>en_US</locale>
+                                <name>current.year</name>
+                                <pattern>yyyy</pattern>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
@@ -210,7 +230,7 @@
                                 <properties>
                                     <owner>OddSource Code</owner>
                                     <email>license@oddsource.io</email>
-                                    <year>2010-2023</year>
+                                    <year>2010-${current.year}</year>
                                 </properties>
                             </licenseSet>
                         </licenseSets>
@@ -286,6 +306,10 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>

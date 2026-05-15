@@ -1,7 +1,7 @@
 Licensing
 ---------
 OddSource OSS Parent POM
-Copyright (c) 2010-2019 Nicholas Williams
+Copyright (c) 2010-2026 Nicholas Williams
 Licensed under the Apache License version 2.0 (see LICENSE.txt)
 
 

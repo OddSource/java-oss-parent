@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#
 # Copyright © 2010-2023 OddSource Code (license@oddsource.io)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 CURRENT_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
 NEXT_VERSION=$1

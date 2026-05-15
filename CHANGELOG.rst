@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.5.0 (2026-05-15)
+------------------
+- [MINOR] Update plugin versions and make license check year-flexible
+
 2.4.0 (2023-10-28)
 ------------------
 - [MINOR] Use a different structure with an oss-build-resources module that distributes checkstyle config
