@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.5.1 (2026-05-15)
+------------------
+- [PATCH] Allow use of new Java 25 LTS
+
 2.5.0 (2026-05-15)
 ------------------
 - [MINOR] Update plugin versions and make license check year-flexible
