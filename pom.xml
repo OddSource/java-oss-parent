@@ -80,7 +80,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <distribution.repo.url.maven.base>https://central.sonatype.org</distribution.repo.url.maven.base>
         <distribution.repo.url.maven.snapshot>${distribution.repo.url.maven.base}/repository/maven-snapshots</distribution.repo.url.maven.snapshot>
-        <distribution.repo.url.maven.staging>${distribution.repo.url.maven.base}/repository/maven-releases</distribution.repo.url.maven.staging>
+        <distribution.repo.url.maven.staging>${distribution.repo.url.maven.base}</distribution.repo.url.maven.staging>
         <version.plugin.build.helper>3.6.1</version.plugin.build.helper>
         <version.plugin.checksum>1.8</version.plugin.checksum>
         <version.plugin.compiler>3.11.0</version.plugin.compiler>
@@ -267,7 +267,6 @@
                     <inherited>true</inherited>
                     <configuration>
                         <keyname>${gpg.keyname}</keyname>
-                        <passphraseServerId>${gpg.keyname}</passphraseServerId>
                     </configuration>
                     <executions>
                         <execution>
@@ -289,10 +288,12 @@
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
                     <version>${version.plugin.central.publishing}</version>
+                    <extensions>true</extensions>
                     <inherited>true</inherited>
                     <configuration>
-                        <publishingServerId>maven.central.delpoy</publishingServerId>
+                        <autoPublish>false</autoPublish>
                         <checksums>all</checksums>
+                        <publishingServerId>maven.central.delpoy</publishingServerId>
                         <waitUntil>validated</waitUntil>
                     </configuration>
                     <executions>
