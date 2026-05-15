@@ -78,13 +78,13 @@
         <gpg.keyname>1AD267184ADD933C9C6D48E4FE2E2E95AC572F8F</gpg.keyname>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <distribution.repo.url.sonatype.base>https://oss.sonatype.org/</distribution.repo.url.sonatype.base>
-        <distribution.repo.url.sonatype.snapshot>${distribution.repo.url.sonatype.base}content/repositories/snapshots</distribution.repo.url.sonatype.snapshot>
-        <distribution.repo.url.sonatype.staging>${distribution.repo.url.sonatype.base}service/local/staging/deploy/maven2</distribution.repo.url.sonatype.staging>
+        <distribution.repo.url.maven.base>https://central.sonatype.org</distribution.repo.url.maven.base>
+        <distribution.repo.url.maven.snapshot>${distribution.repo.url.maven.base}/repository/maven-snapshots</distribution.repo.url.maven.snapshot>
+        <distribution.repo.url.maven.staging>${distribution.repo.url.maven.base}/repository/maven-releases</distribution.repo.url.maven.staging>
         <version.plugin.build.helper>3.6.1</version.plugin.build.helper>
         <version.plugin.checksum>1.8</version.plugin.checksum>
         <version.plugin.compiler>3.11.0</version.plugin.compiler>
-        <version.plugin.deploy>3.1.4</version.plugin.deploy>
+        <version.plugin.central.publishing>0.10.0</version.plugin.central.publishing>
         <version.plugin.enforcer>3.6.2</version.plugin.enforcer>
         <version.plugin.gpg>3.2.8</version.plugin.gpg>
         <version.plugin.install>3.1.4</version.plugin.install>
@@ -98,9 +98,9 @@
 
     <repositories>
         <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>${distribution.repo.url.sonatype.snapshot}</url>
+            <id>maven-central-snapshots</id>
+            <name>Maven Central Snapshots</name>
+            <url>${distribution.repo.url.maven.snapshot}</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -112,14 +112,14 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshot Repository</name>
-            <url>${distribution.repo.url.sonatype.snapshot}</url>
+            <id>maven-central-snapshots</id>
+            <name>Maven Central Snapshot Repository</name>
+            <url>${distribution.repo.url.maven.snapshot}</url>
         </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Sonatype Nexus Release-Staging Repository</name>
-            <url>${distribution.repo.url.sonatype.staging}</url>
+            <id>maven-central-staging</id>
+            <name>Maven Central Release-Staging Repository</name>
+            <url>${distribution.repo.url.maven.staging}</url>
         </repository>
     </distributionManagement>
 
@@ -286,11 +286,14 @@
                     <inherited>true</inherited>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${version.plugin.deploy}</version>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>${version.plugin.central.publishing}</version>
                     <inherited>true</inherited>
                     <configuration>
+                        <publishingServerId>maven.central.delpoy</publishingServerId>
+                        <checksums>all</checksums>
+                        <waitUntil>validated</waitUntil>
                     </configuration>
                     <executions>
                         <execution>
@@ -327,8 +330,8 @@
                 <artifactId>maven-install-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
